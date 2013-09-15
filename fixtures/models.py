@@ -36,8 +36,8 @@ class Fixture(models.Model):
     postponed = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
     played = models.BooleanField(default=True)
-    goals_scored = models.IntegerField(null=True)
-    goals_conceded = models.IntegerField(null=True)
+    goals_scored = models.IntegerField(blank=True, null=True)
+    goals_conceded = models.IntegerField(blank=True, null=True)
     lineup = models.ManyToManyField(SquadMember, through='Selection')
 
     def __str__(self):
