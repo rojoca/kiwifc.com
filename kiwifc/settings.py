@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'fixtures',
     'availability',
     'manager',
+    'public',
     # Uncomment the next line to enable the admin:
     'pagedown',
     'suit',
