@@ -1,0 +1,7 @@
+{
+    "DEBUG":true,
+    "DEPLOMENT_ENV": "local",
+    "DB_USER": "kiwi",
+    "DB_PASSWORD": "thefortress",
+    "DB_HOST": "localhost"
+}
