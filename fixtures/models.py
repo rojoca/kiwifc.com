@@ -7,7 +7,7 @@ class League(models.Model):
     season = models.ForeignKey(Season)
 
     def __str__(self):
-        return self.name
+        return "%s %s" % (self.name, self.season.name)
 
 
 class Venue(models.Model):
@@ -35,7 +35,7 @@ class Fixture(models.Model):
     defaulted = models.BooleanField(default=False)
     postponed = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
-    played = models.BooleanField(default=True)
+    played = models.BooleanField(default=False)
     goals_scored = models.IntegerField(blank=True, null=True)
     goals_conceded = models.IntegerField(blank=True, null=True)
     lineup = models.ManyToManyField(SquadMember, through='Selection')
