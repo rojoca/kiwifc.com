@@ -1,6 +1,8 @@
 Django==1.5.4
+Pillow==2.1.0
 South==0.8.2
 django-pagedown==0.0.4
 django-suit==0.2.4
 psycopg2==2.5.1
+sorl-thumbnail==11.12
 wsgiref==0.1.2
