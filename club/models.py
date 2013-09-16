@@ -28,6 +28,9 @@ class Season(models.Model):
     name = models.CharField(max_length=255)
     year = models.IntegerField()
 
+    class Meta:
+        ordering = ['-year']
+
     def __str__(self):
         return self.name
 
