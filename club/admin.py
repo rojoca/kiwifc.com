@@ -14,3 +14,5 @@ class SeasonAdmin(admin.ModelAdmin):
 
 admin.site.register(Season, SeasonAdmin)
 admin.site.register(Player)
+admin.site.register(Profile)
+admin.site.register(ProfileQuestion)
