@@ -65,3 +65,8 @@ class ProfileAnswer(models.Model):
 
     def __str__(self):
         return '%s: "%s"' % (self.profile.squad_member.name, self.answer)
+
+
+class ProfileAnswerChoice(models.Model):
+    question = models.ForeignKey('ProfileQuestion', related_name='choices')
+    answer = models.CharField(max_length=255)

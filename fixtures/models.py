@@ -55,6 +55,25 @@ class Fixture(models.Model):
 
         return "%s%s vs %s (%s)" % (date, time, self.opponent, home)
 
+    def match_date(self):
+        return self.start_date.date()
+
+    def match_time(self):
+        return self.start_date.time()
+
+    def result(self):
+        if self.played:
+            result = 'D'
+            if self.goals_conceded > self.goals_scored:
+                result = 'L'
+            if self.goals_conceded < self.goals_scored:
+                result = 'W'
+            return result
+
+    def score(self):
+        if self.goals_conceded and self.goals_scored:
+            return "%s - %s" % (self.goals_scored, self.goals_conceded)
+
 
 class Selection(models.Model):
     fixture = models.ForeignKey('Fixture')
@@ -81,6 +100,12 @@ class Goal(models.Model):
             minute = ""
         return "%s%s" % (self.scorer, minute)
 
+    def date(self):
+        return self.scorer.fixture.match_date()
+
+    def opponent(self):
+        return self.scorer.fixture.opponent
+
 
 class Card(models.Model):
     YELLOW = 'yellow'
@@ -100,3 +125,9 @@ class Card(models.Model):
         else:
             minute = ""
         return "%s %s%s" % (self.color.upper(), self.recipient, minute)
+
+    def date(self):
+        return self.recipient.fixture.match_date()
+
+    def opponent(self):
+        return self.recipient.fixture.opponent

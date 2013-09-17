@@ -31,6 +31,11 @@ class SelectionInline(TabularInline):
 
 class FixtureAdmin(admin.ModelAdmin):
     inlines = (SelectionInline,)
+    search_fields = ['opponent__name']
+    list_display = ('result', 'score', 'match_date', 'match_time', 'opponent', 'venue')
+    list_display_links = ('match_date', 'match_time', 'opponent')
+    list_filter = ('league', 'played', 'home_game')
+    list_select_related = True
 
     def get_form(self, request, obj=None, **kwargs):
         # just save obj reference for future processing in Inline
@@ -38,10 +43,27 @@ class FixtureAdmin(admin.ModelAdmin):
         return super(FixtureAdmin, self).get_form(request, obj, **kwargs)
 
 
-admin.site.register(League)
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ('scorer', 'date', 'opponent', 'minute', 'description')
+    list_filter = ['scorer']
+
+
+class CardAdmin(admin.ModelAdmin):
+    list_display = ('color', 'recipient', 'date', 'opponent', 'minute', 'reason')
+
+
+class OpponentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'home_ground')
+
+
+class LeagueAdmin(admin.ModelAdmin):
+    list_display = ('season', 'name')
+
+
+admin.site.register(League, LeagueAdmin)
 admin.site.register(Venue)
-admin.site.register(Opponent)
+admin.site.register(Opponent, OpponentAdmin)
 admin.site.register(Fixture, FixtureAdmin)
-admin.site.register(Goal)
-admin.site.register(Card)
+admin.site.register(Goal, GoalAdmin)
+admin.site.register(Card, CardAdmin)
 
